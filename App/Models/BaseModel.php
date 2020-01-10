@@ -17,9 +17,9 @@ class BaseModel
 
     public static function init(array $config)
     {
-        $capsule = new Capsule;
-        $capsule->addConnection($config);
-        $capsule->setAsGlobal();
-        $capsule->bootEloquent();
+        self::$eloquent = new Capsule;
+        self::$eloquent->addConnection($config);
+        self::$eloquent->setAsGlobal();
+        self::$eloquent->bootEloquent();
     }
 }

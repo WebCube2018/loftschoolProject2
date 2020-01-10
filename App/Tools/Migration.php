@@ -33,13 +33,14 @@ class Migration
             $table->integer("age");
             $table->string("description");
             $table->string("files");
+            $table->string("email");
         });
 
         Capsule::schema()->dropIfExists("files");
 
         Capsule::schema()->create("files", function (Blueprint $table) {
             $table->increments("id");
-            $table->string("name");
+            $table->string("namefile");
         });
     }
 }

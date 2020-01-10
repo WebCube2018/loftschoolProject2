@@ -10,7 +10,7 @@ class Render
         $this->templateDir = realpath(__DIR__ . "/../Views");
     }
 
-    public function render($template, $data = [])
+    public function render($template, $data = [], $extract = true)
     {
         $path = $this->templateDir . "/" . $template . ".php";
 
@@ -18,7 +18,9 @@ class Render
             throw new \RuntimeException("No Template");
         }
 
-        extract($data);
+        if ($extract) {
+            extract($data);
+        }
 
         include $path;
     }

@@ -1,14 +1,13 @@
 <?php
 namespace App\Models;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends BaseModel
+class User extends Model
 {
-    public function getUserId($id)
-    {
-        self::$eloquent;
-        $users = Capsule::table('users')->where('id', '=', $id)->get();
-        return $users;
-    }
+    /**@var string */
+    protected $table = "users";
+
+    /**@var bool*/
+    public $timestamps = false;
 }

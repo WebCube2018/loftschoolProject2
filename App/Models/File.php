@@ -1,7 +1,13 @@
 <?php
 namespace App\Models;
 
-class File extends BaseModel
-{
+use Illuminate\Database\Eloquent\Model;
 
+class File extends Model
+{
+    /**@var string */
+    protected $table = "files";
+
+    /**@var bool*/
+    public $timestamps = false;
 }

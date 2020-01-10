@@ -20,7 +20,7 @@ class Session
         return empty($_SESSION[self::KEY_USER]);
     }
 
-    public function getUser()
+    public function getUserId()
     {
         if ($this->isGuest()) {
             return null;

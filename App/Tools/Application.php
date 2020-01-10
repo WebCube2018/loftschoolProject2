@@ -60,14 +60,16 @@ class Application
             $controllers = new \App\Controllers\Users();
             $controllers->autch();
             exit();
+        } elseif (strpos($_SERVER["REQUEST_URI"], "/registration") === 0) {
+            $controllers = new \App\Controllers\AddUser();
+            $controllers->index();
+            exit();
         } elseif ($_SERVER["REQUEST_URI"] == "/logout") {
             $controllers = new \App\Controllers\Users();
             $controllers->logout();
             exit();
         } else {
-            echo "<pre>";
-            print_r("12321");
-            echo "</pre>";
+            throw new \Exception("no template");
         }
     }
 }
