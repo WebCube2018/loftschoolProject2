@@ -26,11 +26,11 @@ class Application
     {
         BaseModel::init(
             [
-                "driver"    => "mysql",
-                "host"      => "localhost:3306",
-                "database"  => "project2",
-                "username"  => "root",
-                "password"  => "root",
+                "driver"    => DRIVER,
+                "host"      => HOST,
+                "database"  => DATABASE,
+                "username"  => USERNAME,
+                "password"  => PASSWORD,
                 "charset"   => "utf8",
                 "collation" => "utf8_unicode_ci",
                 "prefix"    => "",
@@ -40,14 +40,18 @@ class Application
 
     public function run()
     {
-        if ($_SERVER["REQUEST_URI"] == "/form") {
-            echo "<pre>";
-            print_r("the form");
-            echo "</pre>";
-        } elseif ($_SERVER["REQUEST_URI"] == "/files") {
-            echo "<pre>";
-            print_r("the files");
-            echo "</pre>";
+        if ($_SERVER["REQUEST_URI"] == "/files") {
+            $controllers = new \App\Controllers\Files();
+            $controllers->index();
+            exit();
+        } elseif ($_SERVER["REQUEST_URI"] == "/addfile" && !empty($_FILES)) {
+            $controllers = new \App\Controllers\AddFile();
+            $controllers->addFile();
+            exit();
+        } elseif (strpos($_SERVER["REQUEST_URI"], "/addfile") === 0) {
+            $controllers = new \App\Controllers\AddFile();
+            $controllers->index();
+            exit();
         } elseif ($_SERVER["REQUEST_URI"] == "/users") {
             $controllers = new \App\Controllers\Users();
             $controllers->index();
@@ -69,7 +73,9 @@ class Application
             $controllers->logout();
             exit();
         } else {
-            throw new \Exception("no template");
+            $controllers = new \App\Controllers\Error();
+            $controllers->index();
+            exit();
         }
     }
 }

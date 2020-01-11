@@ -24,43 +24,27 @@
                 <thead>
                 <tr>
                     <th scope="col">id</th>
-                    <th scope="col">Имя</th>
-                    <th scope="col">E-mail</th>
-                    <th scope="col">Возраст</th>
-                    <th scope="col">Совершенолетие</th>
                     <th scope="col">Файл</th>
-                    <th scope="col">Описание</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php foreach ($data as $value) : ?>
                     <tr>
-                        <th scope="row"><?=$value->id?></th>
-                        <td><?=$value->name?></td>
-                        <td><?=$value->email?></td>
-                        <td><?=$value->age?></td>
+                        <th scope="row"><?=$value["id"]?></th>
                         <td>
-                            <?php if ($value->age < 18) : ?>
-                                Несовершеннолетний
-                            <?php else : ?>
-                                Совершеннолетний
-                            <?php endif; ?>
-                        </td>
-                        <td>
-                            <?php if (!$value->namefile) : ?>
+                            <?php if (!$value["namefile"]) : ?>
                                 no files
                             <?php else : ?>
-                                <a href="/images/<?=$value->namefile?>"><?=$value->namefile?></a>
+                                <a href="/images/<?=$value["namefile"]?>"><?=$value["namefile"]?></a>
                             <?php endif; ?>
                         </td>
-                        <td><?=$value->description?></td>
                     </tr>
                 <?php endforeach; ?>
                 </tbody>
             </table>
             <p class="mt-5 mb-3 text-muted">
-                Перйти к списку Ваших
-                <a href="/files">файлов</a>
+                Перйти к списку
+                <a href="/users">Пользователей</a>
             </p>
         </div>
     </div>

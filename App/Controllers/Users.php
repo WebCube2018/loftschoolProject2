@@ -1,37 +1,29 @@
 <?php
 namespace App\Controllers;
 
-use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Illuminate\Database\Capsule\Manager as DB;
 
 class Users extends BaseControllers
 {
-    protected $userModel;
-    
     public function index()
     {
         if ($this->session->isGuest()) {
             $this->redirect("/login");
         }
 
-        $users = User::all();
-        if (!isset($users)) {
+        $user = User::all();
+        if (!isset($user)) {
             throw new \InvalidArgumentException("No users");
         }
 
         $users = DB::table('users')
-            ->join('files', 'users.files', '=', 'files.id')
+            ->orderBy('age', 'desc')
+            ->join('files', 'users.id', '=', 'files.user_id')
             ->select('users.*', 'files.namefile')
-            ->get();
-#---------------------------НАЧАЛО ОТЛАДКА---------------------------#
-echo "<pre>";
-print_r($users);
-echo "</pre>";
-exit();
-#---------------------------КОНЕЦ ОТЛАДКА----------------------------#
-
-        $users = $users->toArray();
-
+            ->get()
+            ->toArray();
+        
         $this->view->render(
             "users",
             [

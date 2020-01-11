@@ -6,20 +6,20 @@ use Illuminate\Database\Capsule\Manager as Capsule;
 
 class BaseModel
 {
-    protected static $eloquent;
+    public static $DB;
 
     public function __construct()
     {
-        if (self::$eloquent === null) {
+        if (self::$DB === null) {
             throw new \RuntimeException("No db");
         }
     }
 
     public static function init(array $config)
     {
-        self::$eloquent = new Capsule;
-        self::$eloquent->addConnection($config);
-        self::$eloquent->setAsGlobal();
-        self::$eloquent->bootEloquent();
+        self::$DB = new Capsule;
+        self::$DB->addConnection($config);
+        self::$DB->setAsGlobal();
+        self::$DB->bootEloquent();
     }
 }

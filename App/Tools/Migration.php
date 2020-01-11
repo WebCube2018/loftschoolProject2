@@ -12,11 +12,11 @@ class Migration
         $capsule = new Capsule;
         $capsule->addConnection(
             [
-                "driver"    => "mysql",
-                "host"      => "localhost:3306",
-                "database"  => "project2",
-                "username"  => "root",
-                "password"  => "root",
+                "driver"    => DRIVER,
+                "host"      => HOST,
+                "database"  => DATABASE,
+                "username"  => USERNAME,
+                "password"  => PASSWORD,
                 "charset"   => "utf8",
                 "collation" => "utf8_unicode_ci",
                 "prefix"    => "",
@@ -32,7 +32,6 @@ class Migration
             $table->string("name");
             $table->integer("age");
             $table->string("description");
-            $table->string("files");
             $table->string("email");
         });
 
@@ -41,6 +40,7 @@ class Migration
         Capsule::schema()->create("files", function (Blueprint $table) {
             $table->increments("id");
             $table->string("namefile");
+            $table->integer("user_id");
         });
     }
 }

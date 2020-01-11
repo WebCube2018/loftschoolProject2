@@ -23,11 +23,6 @@ class AddUser extends BaseControllers
         }
 
         if (!empty($_POST)) {
-            //Добавляем фвйл
-            $addFile = new File();
-            $addFile->namefile = $fileName;
-            $addFile->save();
-
             //Добавляем пользователя в БД
             $addUser = new User();
             $addUser->email = htmlspecialchars(strtoupper(trim($_POST["email"])));
@@ -35,8 +30,13 @@ class AddUser extends BaseControllers
             $addUser->name = htmlspecialchars($_POST["name"]);
             $addUser->age = htmlspecialchars($_POST["age"]);
             $addUser->description = htmlspecialchars($_POST["description"]);
-            $addUser->files = $addFile->id;
             $addUser->save();
+
+            //Добавляем фвйл
+            $addFile = new File();
+            $addFile->namefile = $fileName;
+            $addFile->user_id = $addUser->id;
+            $addFile->save();
 
             //Сразу авторизуем пользователя после регистрации и направлем на список пользователей
             $this->session->login($addUser->id);
