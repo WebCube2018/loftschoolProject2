@@ -6,8 +6,12 @@
 <li> /www/images - файлы загруженне пользователем
 
 ***Пути приложения***
-<li> <http://localhost/users> - список пользователей 
-<li> <http://localhost/files> - список файлов авторизованного пользователя 
-<li> <http://localhost/login> - авторизация
-<li> <http://localhost/registration> - Регистрация
+
+<http://localhost/users> - список пользователей
+
+<http://localhost/files> - список файлов авторизованного пользователя
+ 
+<http://localhost/login> - авторизация
+
+<http://localhost/registration> - Регистрация
 
