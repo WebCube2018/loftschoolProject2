@@ -2,6 +2,7 @@
 namespace App\Tools;
 
 use App\Models\BaseModel;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Application
 {
@@ -24,7 +25,8 @@ class Application
 
     protected function db()
     {
-        BaseModel::init(
+        BaseModel::$DB = new Capsule;
+        BaseModel::$DB->addConnection(
             [
                 "driver"    => DRIVER,
                 "host"      => HOST,
@@ -36,6 +38,8 @@ class Application
                 "prefix"    => "",
             ]
         );
+        BaseModel::$DB->setAsGlobal();
+        BaseModel::$DB->bootEloquent();
     }
 
     public function run()
