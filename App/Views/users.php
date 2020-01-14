@@ -11,6 +11,43 @@
     <title>Hello, world!</title>
 </head>
 <body>
+<?php if ($role == 1) : ?>
+    <div class="pos-f-t">
+        <div class="collapse" id="navbarToggleExternalContent">
+            <div class="bg-dark p-4">
+                <h4 class="text-white">Функции Администратора</h4>
+                <ul class="text-white nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/adduser">Добавить пользователя</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/addfile">Добавить себе файл</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/files">Перйти к списку Ваших файлов</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Выйти</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <nav class="navbar navbar-dark bg-dark">
+            <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarToggleExternalContent"
+                    aria-controls="navbarToggleExternalContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+                Меню администратора
+            </button>
+        </nav>
+    </div>
+<?php endif; ?>
 <div class="container">
     <div class="row">
         <div class="col-xl d-flex justify-content-between align-items-center">
@@ -37,7 +74,12 @@
                     <tr>
                         <th scope="row"><?=$value->id?></th>
                         <td><?=$value->name?></td>
-                        <td><?=$value->email?></td>
+                        <td>
+                            <?=$value->email?>
+                            <?php if ($role == 1) : ?>
+                                <a href="/edituser?id=<?=$value->id?>">Редактировать</a>
+                            <?php endif; ?>
+                        </td>
                         <td><?=$value->age?></td>
                         <td>
                             <?php if ($value->age < 18) : ?>
@@ -58,9 +100,13 @@
                 <?php endforeach; ?>
                 </tbody>
             </table>
-            <p class="mt-5 mb-3 text-muted">
+            <p class="mb-3 text-muted">
                 Перйти к списку Ваших
                 <a href="/files">файлов</a>
+            </p>
+            <p class="mb-3 text-muted">
+                Добавить файл
+                <a href="/addfile">файл</a>
             </p>
         </div>
     </div>

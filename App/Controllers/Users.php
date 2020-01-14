@@ -29,6 +29,7 @@ class Users extends BaseControllers
             [
                 "user" => $this->session->getUserId(),
                 "data" => $users,
+                "role" => $this->session->getUserRole()
             ]
         );
     }
@@ -67,8 +68,8 @@ class Users extends BaseControllers
             $this->redirect("/login?error=1");
         }
 
-        $userId = User::where('email', $login)->first()->toArray();
-        $this->session->login($userId["id"]);
+        $user = User::where('email', $login)->first()->toArray();
+        $this->session->login($user["id"], $user["role"]);
         $this->redirect("users");
     }
 
