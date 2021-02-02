@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "illuminate/database": "5.4",
+        "illuminate/database": "6.20.14",
         "fzaninotto/faker": "^1.9"
     },
     "autoload": {
